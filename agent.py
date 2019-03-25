@@ -44,9 +44,11 @@ def parse_html_xici():
         time.sleep(10)
     return list_res
 
+# 随机使用浏览器头
 def getRandUserAgent():
     return UserAgent().random
 
+# 取出代理池IP
 def getLocalIP(path):
     if os.path.exists(path):
         with open(path, 'r', encoding='utf-8') as fr:
@@ -55,7 +57,7 @@ def getLocalIP(path):
     else:
         return []
 
-
+# 去除重复IP
 def removeMultiple(list_ip):
     list_new = []
     exist_ip = []
@@ -79,6 +81,7 @@ def testIP(list_new):
     list_verity = []
     for dict_ip in list_new:
         if verify(dict_ip):
+            dict_ip['count'] = dict_ip.get('count', 0) + 1
             list_verity.append(dict_ip)
     return list_verity
 
